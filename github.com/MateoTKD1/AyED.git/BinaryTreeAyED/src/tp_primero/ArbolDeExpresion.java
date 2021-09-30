@@ -15,6 +15,38 @@ public class ArbolDeExpresion extends ArbolBinario { //Acá hay algún problema co
 	private ArbolDeExpresion(NodoBinario nodo) {
 		this.raiz=nodo;
 	}
+	private NodoBinario getRaiz() {
+		return this.raiz;
+	}
+	public ArbolBinario getHijoIzquierdo() {
+		if(this.getRaiz()!=null) {
+			if(this.getRaiz().getHijoIzquierdo()!=null)
+				return new ArbolBinario(getRaiz().getHijoIzquierdo());	
+			else return new ArbolBinario();
+		}
+		else return new ArbolBinario();
+	}
+	public ArbolBinario getHijoDerecho() {
+		if(this.getRaiz()!=null) {
+			if(this.getRaiz().getHijoDerecho()!=null)
+				return new ArbolBinario(getRaiz().getHijoDerecho());	
+			else return new ArbolBinario();
+		}
+		else return new ArbolBinario();
+	}
+	
+	public void imprimirInOrden() {
+		if(getRaiz()==null) {
+			return;
+		}
+		this.getHijoIzquierdo().imprimirInOrden();
+		System.out.print(" " +this.getDatoRaiz()+ " ");
+		this.getHijoDerecho().imprimirInOrden();
+	}
+	public Object getDatoRaiz() {
+		return getRaiz().getDato();
+	}
+	
 	static public ArbolDeExpresion convertirPostfija(String exp) {
 		ArrayList<NodoBinario>pila = new ArrayList<>();
 		for(int i=0; i<exp.length();i++) {
